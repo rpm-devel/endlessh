@@ -1,0 +1,23 @@
+From 9e66ab19d6b57ae96b161a8acd11bec1a76670c2 Mon Sep 17 00:00:00 2001
+From: nicoo <nicoo@debian.org>
+Date: Sun, 16 Feb 2020 11:44:36 +0100
+Subject: [PATCH] Makefile: Use implicit rules for compiling C, honour CPPFLAGS
+
+---
+ Makefile | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 507b2f7..8f38aca 100644
+--- a/Makefile
++++ b/Makefile
+@@ -7,9 +7,6 @@ PREFIX  = /usr/local
+ 
+ all: endlessh
+ 
+-endlessh: endlessh.c
+-	$(CC) $(LDFLAGS) $(CFLAGS) -o $@ endlessh.c $(LDLIBS)
+-
+ install: endlessh
+ 	install -d $(DESTDIR)$(PREFIX)/bin
+ 	install -m 755 endlessh $(DESTDIR)$(PREFIX)/bin/

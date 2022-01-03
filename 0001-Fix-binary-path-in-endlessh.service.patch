@@ -1,0 +1,24 @@
+From: nicoo <nicoo@debian.org>
+Date: Fri, 7 Feb 2020 01:12:50 +0100
+Subject: Fix binary path in endlessh.service
+Origin: vendor
+Forwarded: not-needed
+Last-Update: 2020-11-01
+
+---
+ util/endlessh.service | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/util/endlessh.service b/util/endlessh.service
+index fd12a00..f997293 100644
+--- a/util/endlessh.service
++++ b/util/endlessh.service
+@@ -7,7 +7,7 @@ Requires=network-online.target
+ Type=simple
+ Restart=always
+ RestartSec=30sec
+-ExecStart=/usr/local/bin/endlessh
++ExecStart=/usr/bin/endlessh
+ KillSignal=SIGTERM
+ 
+ # Stop trying to restart the service if it restarts too many times in a row

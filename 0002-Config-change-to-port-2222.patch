@@ -1,0 +1,25 @@
+From 8ff17b73ef0c61f86320690fd1c6c5b98d2fe446 Mon Sep 17 00:00:00 2001
+From: Mikel Olasagasti Uranga <mikel@olasagasti.info>
+Date: Thu, 3 Dec 2020 20:10:43 +0100
+Subject: [PATCH 2/2] Config change to port 2222
+
+---
+ util/smf/endlessh.conf | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/util/smf/endlessh.conf b/util/smf/endlessh.conf
+index 5137178..f002559 100644
+--- a/util/smf/endlessh.conf
++++ b/util/smf/endlessh.conf
+@@ -1,5 +1,7 @@
+ # The port on which to listen for new SSH connections.
+-Port 22
++# Read /usr/lib/systemd/system/endlessh.service for required
++# conf changes for binding to port <1024
++Port 2222
+ 
+ # The endless banner is sent one line at a time. This is the delay
+ # in milliseconds between individual lines.
+-- 
+2.28.0
+
