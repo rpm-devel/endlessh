@@ -13,12 +13,12 @@ Patch2:		9e66ab19d6b57ae96b161a8acd11bec1a76670c2.patch
 BuildRequires:	make
 BuildRequires:	gcc
 BuildRequires:	git
-%if 0%{?el7}
+%if 0%{?rhel} == 7
 BuildRequires: systemd
 %else
 BuildRequires: systemd-rpm-macros
 %endif
-Requires:	systemd
+%{?systemd_requires}
 
 %description
 Endlessh is an SSH tarpit that very slowly sends an endless, random SSH banner.
@@ -32,11 +32,7 @@ stuck in this tarpit instead of bothering a real server.
 %build
 # Makefile doesn't allow overriding from environment, change it
 # add -std=c99 manually for rhel7
-%if 0%{?el7}
-sed -i -e "s:^CFLAGS.*:CFLAGS = -std=c99 %{optflags}:" Makefile
-%else
 sed -i -e "s:^CFLAGS.*:CFLAGS = %{optflags}:" Makefile
-%endif
 %make_build
 
 %install
