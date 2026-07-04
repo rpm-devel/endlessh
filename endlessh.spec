@@ -5,6 +5,7 @@ Release:	2%{?dist}
 
 License:	Unlicense
 URL:		https://github.com/skeeto/endlessh
+ExclusiveArch:	x86_64 aarch64
 Source0:	https://github.com/skeeto/endlessh/archive/%{version}/%{name}-%{version}.tar.gz
 Patch0:		0001-Fix-binary-path-in-endlessh.service.patch
 Patch1:		0002-Config-change-to-port-2222.patch
@@ -13,11 +14,7 @@ Patch2:		9e66ab19d6b57ae96b161a8acd11bec1a76670c2.patch
 BuildRequires:	make
 BuildRequires:	gcc
 BuildRequires:	git
-%if 0%{?rhel} == 7
-BuildRequires: systemd
-%else
 BuildRequires: systemd-rpm-macros
-%endif
 %{?systemd_requires}
 
 %description
@@ -31,7 +28,6 @@ stuck in this tarpit instead of bothering a real server.
 
 %build
 # Makefile doesn't allow overriding from environment, change it
-# add -std=c99 manually for rhel7
 sed -i -e "s:^CFLAGS.*:CFLAGS = %{optflags}:" Makefile
 %make_build
 
@@ -64,6 +60,11 @@ install -m644 ./util/endlessh.service %{buildroot}/%{_unitdir}/%{name}.service
 
 
 %changelog
+* Sat Jul 04 2026 CasjaysDev <rpm-devel@casjaysdev.pro> - 1.1-2
+- Source0: GitHub archive URL verified (tag 1.1 exists, 302→200; 1.1 is latest)
+- Drop RHEL7 systemd conditional; always BuildRequires: systemd-rpm-macros
+- Add ExclusiveArch: x86_64 aarch64
+
 * Fri Dec 4 2020 Mikel Olasagasti Uranga <mikel@olasagasti.info> - 1.1-2
 - Changes after revision in #1904172
 
